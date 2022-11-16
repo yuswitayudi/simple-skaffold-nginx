@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-skaffold
+  labels:
+    app: nginx-skaffold
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-skaffold
+  template:
+    metadata:
+      labels:
+        app: nginx-skaffold
+    spec:
+      containers:
+      - name: nginx-skaffold
+        image: 192.168.1.140:32000/nginx-skaffold
+        ports:
+        - containerPort: 80

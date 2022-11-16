@@ -1,0 +1,20 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: simple-skaffold-nginx
+build:
+  artifacts:
+  - image: your-private-registry:32000/nginx-skaffold
+    docker:
+      dockerfile: Dockerfile
+manifests:
+  rawYaml:
+  - manifests/deployment.yaml
+  - manifests/service.yaml
+
+portForward:
+- resourceType: deployment
+  resourceName: nginx-skaffold
+  namespace: default
+  port: 80
+  localPort: 9000
